@@ -10,6 +10,7 @@ app.config['MODEL_FOLDER'] = './models'
 
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 os.makedirs(app.config['TRANSCRIPT_FOLDER'], exist_ok=True)
+os.makedirs(app.config['MODEL_FOLDER'], exist_ok=True)
 
 @app.route('/')
 def home():
