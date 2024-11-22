@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcript</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #212529;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .segment {
+            padding: 10px;
+            border-bottom: 1px solid #444;
+        }
+        .timestamp {
+            color: #999;
+            font-size: 14px;
+        }
+        .audio-player {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Transcript</div>
+        <div id="transcript"></div>
+        <audio class="audio-player" controls id="audioPlayer">
+            <source id="audioSource" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <script>
+        const transcriptData = JSON.parse(localStorage.getItem('transcriptData'));
+        const audioFilePath = localStorage.getItem('audioPath');
+
+        const transcriptContainer = document.getElementById('transcript');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const audioSource = document.getElementById('audioSource');
+
+        transcriptData.forEach(segment => {
+            const segmentDiv = document.createElement('div');
+            segmentDiv.classList.add('segment');
+            segmentDiv.innerHTML = `
+                <div class="timestamp">${formatTimestamp(segment.start)} - ${formatTimestamp(segment.end)}</div>
+                <div>${segment.text}</div>
+            `;
+            transcriptContainer.appendChild(segmentDiv);
+        });
+
+        audioSource.src = audioFilePath;
+        audioPlayer.load();
+
+        function formatTimestamp(seconds) {
+            const date = new Date(seconds * 1000);
+            const minutes = date.getUTCMinutes();
+            const secondsPart = date.getUTCSeconds();
+            return `${minutes}:${secondsPart.toString().padStart(2, '0')}`;
+        }
+    </script>
+</body>
+</html>
