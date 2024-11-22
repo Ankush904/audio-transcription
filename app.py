@@ -6,6 +6,7 @@ import json
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = './uploads'
 app.config['TRANSCRIPT_FOLDER'] = './transcripts'
+app.config['MODEL_FOLDER'] = './models'
 
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 os.makedirs(app.config['TRANSCRIPT_FOLDER'], exist_ok=True)
@@ -41,7 +42,7 @@ def transcribe():
     audio.save(audio_file_path)
 
     # Load the Whisper model
-    model = whisper.load_model(model=model_name, download_root="models")
+    model = whisper.load_model(model=model_name, download_root=app.config['UPLOAD_FOLDER'])
     result = model.transcribe(audio_file_path)
 
     # Save the transcription
