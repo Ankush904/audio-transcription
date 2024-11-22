@@ -26,6 +26,6 @@ TestResults.xml
 transcripts/*
 uploads/*
 models/*
-!transcripts/.gitkeep
-!uploads/.gitkeep
-!models/.gitkeep
+
+.venv
+
