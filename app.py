@@ -51,7 +51,7 @@ def transcribe():
 
     # Load the Whisper model
     model = whisper.load_model(
-        name=model_name, download_root=app.config["MODEL_FOLDER"]
+        name=model_name, download_root=app.config["MODEL_FOLDER"], in_memory=True
     )
     result = model.transcribe(audio_file_path)
 
