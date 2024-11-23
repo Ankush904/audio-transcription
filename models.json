@@ -1,3 +1,6 @@
 {
-    "turbo": "large-v3-turbo.pt"
+    "turbo": "large-v3-turbo.pt",
+    "large": "large-v3.pt",
+    "medium": "medium.pt",
+    "small": "small.pt"
 }

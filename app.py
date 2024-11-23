@@ -81,7 +81,6 @@ def serve_uploads(filename):
     if not os.path.exists(file_path):
         return Response("File not found", status=404)
 
-    print(request.headers)
     range_header = request.headers.get("Range", None)
     file_size = os.path.getsize(file_path)
     start, end = 0, file_size - 1
@@ -105,7 +104,6 @@ def serve_uploads(filename):
 
     # Return a partial response
     rv = Response(data, status=206, mimetype="audio/wav")
-    print(rv)
     rv.headers.add("Content-Range", f"bytes {start}-{end}/{file_size}")
     rv.headers.add("Accept-Ranges", "bytes")
     rv.headers.add("Content-Length", str(end - start + 1))

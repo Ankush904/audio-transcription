@@ -28,4 +28,4 @@ uploads/*
 models/*
 
 .venv
-
+.cache
